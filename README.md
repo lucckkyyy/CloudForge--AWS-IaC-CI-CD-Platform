@@ -19,7 +19,7 @@ I wrote the architecture down first, split the Terraform into three reusable mod
 | Bootstrap (state bucket, OIDC provider, deploy role) | Written in `bootstrap/` |
 | GitHub Actions: fmt, validate, Checkov, plan, apply | Written in `.github/workflows/terraform.yml` |
 | `terraform validate` | Not yet run |
-| Checkov scan | Not yet run |
+| Checkov scan of `terraform/` and `bootstrap/` | **0 failed** (52 and 27 passed), 16 skips with reasons in `.checkov.yaml` |
 | `terraform apply` in a real AWS account, teardown and rebuild time | Results go in `docs/deploy-log.md` |
 
 Nothing here has been deployed yet. Results are recorded in `docs/deploy-log.md` as I run them.

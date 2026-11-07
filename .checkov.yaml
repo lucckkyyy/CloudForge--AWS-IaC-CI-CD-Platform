@@ -1,0 +1,24 @@
+# Checkov configuration. Every skipped check has a reason.
+# This is a lab project, so some production controls are deliberately skipped.
+framework:
+  - terraform
+directory:
+  - terraform
+  - bootstrap
+skip-check:
+  - CKV_AWS_91    # ALB access logs: needs an extra S3 bucket, skipped for the lab
+  - CKV_AWS_150   # ALB deletion protection: off so terraform destroy works
+  - CKV2_AWS_28   # WAF in front of ALB: out of scope for the lab
+  - CKV_AWS_2     # ALB HTTPS-only listener: HTTP listener used when no domain is set
+  - CKV_AWS_103   # TLS 1.2 on listener: applies only when HTTPS is enabled
+  - CKV_AWS_260   # ALB security group allows port 80 from the internet: it is a public web entry point
+  - CKV2_AWS_20   # HTTP to HTTPS redirect: only created when a domain and certificate are supplied
+  - CKV_AWS_378   # ALB to instance traffic is HTTP inside the VPC: TLS ends at the ALB in this lab
+  - CKV2_AWS_11   # VPC flow logs: skipped to limit cost
+  - CKV2_AWS_12   # Default SG restricted: default SG is not used
+  - CKV_AWS_144   # Cross-region replication on state bucket: out of scope
+  - CKV_AWS_145   # KMS for state bucket: AES256 used instead
+  - CKV_AWS_18    # S3 access logging: out of scope
+  - CKV2_AWS_61   # S3 lifecycle: out of scope
+  - CKV2_AWS_62   # S3 event notifications: out of scope
+  - CKV_AWS_274   # AdministratorAccess on deploy role: lab only, scope down for real use
